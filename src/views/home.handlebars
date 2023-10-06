@@ -1,0 +1,29 @@
+<main>
+  <h1>Teams</h1>
+
+  <a href="/form/add">Add Team</a>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Country</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each data.teams}}
+        <tr>
+          <td>{{this.shortName}}</td>
+          <td>{{this.country}}</td>
+          <td class="{{this.id}}">
+            <a href="/view/{{this.id}}">View</a>
+            <a href="/form/edit/{{this.id}}">Edit</a>
+            <a>Delete</a>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+</main>
