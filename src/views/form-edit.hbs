@@ -1,27 +1,53 @@
-<h1>Form Edit</h1>
+<div class="wrapper">
+  <h1>Form Edit</h1>
 
-<form action="">
+  <form action="">
     <label for="name">Name</label>
-    <input type="text" name="name" id="name" value="{{data.mappedTeam.name}}">
+    <input type="text" name="name" id="name" value="{{data.selectedTeam.name}}" />
 
-    <label for="initials">Initials</label>
-    <input type="text" name="initials" id="initials" value="{{data.mappedTeam.initials}}">
+    <label for="tla">Initials</label>
+    <input type="text" name="tla" id="tla" value="{{data.selectedTeam.tla}}" />
 
     <label for="country">Country</label>
-    <input type="text" name="country" id="country" value="{{data.mappedTeam.country}}">
+    <input
+      type="text"
+      name="country"
+      id="country"
+      value="{{data.selectedTeam.area.name}}"
+    />
 
-    <label for="date">Founded Date</label>
-    <input type="text" name="date" id="date" value="{{data.mappedTeam.founded}}">
+    <label for="founded">Founded Date</label>
+    <input
+      type="text"
+      name="founded"
+      id="founded"
+      value="{{data.selectedTeam.founded}}"
+    />
 
     <label for="address">Address</label>
-    <input type="text" name="address" id="address" value="{{data.mappedTeam.address}}">
+    <input
+      type="text"
+      name="address"
+      id="address"
+      value="{{data.selectedTeam.address}}"
+    />
 
-    <label for="stadium">Stadium Name</label>
-    <input type="text" name="stadium" id="stadium" value="{{data.mappedTeam.stadium}}">
+    <label for="venue">Stadium Name</label>
+    <input type="text" name="venue" id="venue" value="{{data.selectedTeam.venue}}" />
 
     <label for="website">Website</label>
-    <input type="text" name="website" id="website" value="{{data.mappedTeam.website}}">
+    <input
+      type="text"
+      name="website"
+      id="website"
+      value="{{data.selectedTeam.website}}"
+    />
 
-    <label for="email">Email</Eabel>
-    <input type="text" name="email" Ed="email" value="{{data.mappedTeam.email}}">
-</form>
+    <label for="email">Email</label>
+    <input type="text" name="email" id="email" value="{{data.selectedTeam.email}}" />
+
+    <label for="phone">Phone</label>
+    <input type="text" name="phone" id="phone" value="{{data.selectedTeam.phone}}" />
+
+  </form>
+</div>

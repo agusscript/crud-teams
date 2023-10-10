@@ -3,7 +3,7 @@
 
   <a href="/form/add">Add Team</a>
 
-  <table>
+  <table class="teams-section">
     <thead>
       <tr>
         <th>Name</th>
@@ -12,10 +12,10 @@
       </tr>
     </thead>
     <tbody>
-      {{#each data.teams}}
+      {{#each data.teamList}}
         <tr>
           <td>{{this.shortName}}</td>
-          <td>{{this.country}}</td>
+          <td>{{this.area.name}}</td>
           <td class="{{this.id}}">
             <a href="/view/{{this.id}}">View</a>
             <a href="/form/edit/{{this.id}}">Edit</a>

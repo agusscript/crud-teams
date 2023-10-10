@@ -1,16 +1,17 @@
 <div class="wrapper">
   <h1>Team Details</h1>
-  <p>{{data.mappedTeam.name}}</p>
+  <p>{{data.selectedTeam.name}}</p>
   <img
     class="team-shield-img"
-    src="{{data.mappedTeam.image}}"
-    alt="{{data.mappedTeam.name}}"
+    src="{{data.selectedTeam.crestUrl}}"
+    alt="{{data.selectedTeam.name}}"
   />
-  <p>{{data.mappedTeam.initials}}</p>
-  <p>{{data.mappedTeam.country}}</p>
-  <p>{{data.mappedTeam.founded}}</p>
-  <p>{{data.mappedTeam.address}}</p>
-  <p>{{data.mappedTeam.stadium}}</p>
-  <p>{{data.mappedTeam.website}}</p>
-  <p>{{data.mappedTeam.email}}</p>
+  <p>{{data.selectedTeam.tla}}</p>
+  <p>{{data.selectedTeam.area.name}}</p>
+  <p>{{data.selectedTeam.founded}}</p>
+  <p>{{data.selectedTeam.address}}</p>
+  <p>{{data.selectedTeam.venue}}</p>
+  <p>{{data.selectedTeam.website}}</p>
+  <p>{{data.selectedTeam.email}}</p>
+  <p>{{data.selectedTeam.phone}}</p>
 </div>

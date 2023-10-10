@@ -1,32 +1,34 @@
 class Team {
   constructor(
     id,
+    area,
     name,
     shortName,
-    initials,
-    image,
-    country,
-    founded,
+    tla,
+    crestUrl,
     address,
-    stadium,
-    colors,
-    website,
     phone,
-    email
+    website,
+    email,
+    founded,
+    clubColors,
+    venue,
+    lastUpdated
   ) {
     this.id = id;
+    this.area = area;
     this.name = name;
     this.shortName = shortName;
-    this.initials = initials;
-    this.image = image;
-    this.country = country;
-    this.founded = founded;
+    this.tla = tla;
+    this.crestUrl = crestUrl;
     this.address = address;
-    this.stadium = stadium;
-    this.colors = colors;
-    this.website = website;
     this.phone = phone;
+    this.website = website;
     this.email = email;
+    this.founded = founded;
+    this.clubColors = clubColors;
+    this.venue = venue;
+    this.lastUpdated = lastUpdated;
   }
 }
 

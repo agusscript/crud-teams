@@ -1,29 +1,67 @@
-<h1>Form Add</h1>
+<div class="wrapper">
+  <h1>Form Add</h1>
 
-<form action="/form/add" method="POST">
-    <label for="name">Name</label>
-    <input type="text" name="name" id="name">
+  <form action="/form/add" method="POST" enctype="multipart/form-data" class="form-add">
+    <label for="name">
+      Name
+      <input type="text" id="name" name="name" />
+    </label>
 
-    <label for="initials">Initials</label>
-    <input type="text" name="initials" id="initials">
+    <label for="shortName">
+      Short Name
+      <input type="text" id="shortName" name="shortName" />
+    </label>
 
-    <label for="country">Country</label>
-    <input type="text" name="country" id="country">
+    <label for="tla">
+      Initials
+      <input type="text" name="tla" id="tla" />
+    </label>
 
-    <label for="date">Founded Date</label>
-    <input type="text" name="date" id="date">
+    <label for="country">
+      Country
+      <input type="text" name="country" id="country" />
+    </label>
 
-    <label for="address">Address</label>
-    <input type="text" name="address" id="address">
+    <label for="founded">
+      Founded Date
+      <input type="text" name="founded" id="founded" />
+    </label>
 
-    <label for="stadium">Stadium Name</label>
-    <input type="text" name="stadium" id="stadium">
+    <label for="address">
+      Address
+      <input type="text" name="address" id="address" />
+    </label>
 
-    <label for="website">Website</label>
-    <input type="text" name="website" id="website">
+    <label for="venue">
+      Stadium Name
+      <input type="text" name="venue" id="venue" />
+    </label>
 
-    <label for="email">Email</Eabel>
-    <input type="text" name="email" Ed="email">
+    <label for="clubColors">
+      Club Colors
+      <input type="text" name="clubColors" id="clubColors" />
+    </label>
 
-    <input type="submit" value="Add">
-</form>
+    <label for="website">
+      Website
+      <input type="text" name="website" id="website" />
+    </label>
+
+    <label for="email">
+      Email
+      <input type="text" name="email" Ed="email" />
+    </label>
+
+    <label for="phone">
+      Phone
+      <input type="text" name="phone" Ed="phone" />
+    </label>
+
+    <label for="image">
+      Image
+      <input type="file" name="image" Ed="image" />
+    </label>
+
+    <button class="form-add-btn" type="submit">Add Team</button>
+  </form>
+</div>
