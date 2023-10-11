@@ -18,6 +18,18 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/view/:id", (req, res) => {
+  const urlParamId = req.params.id;
+  const selectedTeam = teamList.find((team) => team.id == urlParamId);
+
+  res.render("details", {
+    layout: "main",
+    data: {
+      selectedTeam,
+    },
+  });
+});
+
 router.get("/form/add", (req, res) => {
   res.render("form-add", {
     layout: "main",
@@ -41,7 +53,7 @@ router.post("/form/add", upload.single("image"), (req, res) => {
 
   const randomId = uuidv4();
   const area = new Area(2072, country);
-  const crestUrl = `/uploads/img/${req.file.filename}`;
+  const crestUrl = req.file && "/uploads/img/" + req.file.filename;
   const lastUpdated = new Date().toISOString();
 
   const newTeam = new Team(
@@ -66,16 +78,49 @@ router.post("/form/add", upload.single("image"), (req, res) => {
   res.redirect("/");
 });
 
-router.get("/view/:id", (req, res) => {
+router.post("/form/edit/:id", upload.single("image"), (req, res) => {
   const urlParamId = req.params.id;
-  const selectedTeam = teamList.find((team) => team.id == urlParamId);
 
-  res.render("details", {
-    layout: "main",
-    data: {
-      selectedTeam,
-    },
-  });
+  const {
+    country,
+    name,
+    shortName,
+    tla,
+    founded,
+    address,
+    venue,
+    clubColors,
+    website,
+    email,
+    phone,
+  } = req.body;
+
+  const area = new Area(2072, country);
+  const prevImage = teamList.find((team) => team.id == urlParamId).crestUrl;
+  const crestUrl = req.file ? "/uploads/img/" + req.file.filename : prevImage;
+  const lastUpdated = new Date().toISOString();
+
+  const updatedTeam = new Team(
+    urlParamId,
+    area,
+    name,
+    shortName,
+    tla,
+    crestUrl,
+    address,
+    phone,
+    website,
+    email,
+    founded,
+    clubColors,
+    venue,
+    lastUpdated
+  );
+
+  const selectedTeamId = teamList.findIndex((team) => team.id == urlParamId);
+  teamList[selectedTeamId] = updatedTeam;
+  fs.writeFileSync("../data/teams.json", JSON.stringify(teamList));
+  res.redirect("/");
 });
 
 router.get("/form/edit/:id", (req, res) => {
