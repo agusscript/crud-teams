@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
 const multer = require("multer");
 const upload = multer({ dest: "../public/uploads/img" });
 
-const teamList = JSON.parse(fs.readFileSync("../data/teams.json"));
+const TeamService = require("../services/teamService");
+const teamList = TeamService.getTeamList();
 const Team = require("../entities/team");
 const Area = require("../entities/area");
 
@@ -37,65 +37,35 @@ router.get("/form/add", (req, res) => {
 });
 
 router.post("/form/add", upload.single("image"), (req, res) => {
-  const {
-    country,
-    name,
-    shortName,
-    tla,
-    founded,
-    address,
-    venue,
-    clubColors,
-    website,
-    email,
-    phone,
-  } = req.body;
-
   const randomId = uuidv4();
-  const area = new Area(2072, country);
+  const area = new Area(2072, req.body.country);
   const crestUrl = req.file && "/uploads/img/" + req.file.filename;
   const lastUpdated = new Date().toISOString();
 
   const newTeam = new Team(
     randomId,
     area,
-    name,
-    shortName,
-    tla,
+    req.body.name,
+    req.body.shortName,
+    req.body.tla,
     crestUrl,
-    address,
-    phone,
-    website,
-    email,
-    founded,
-    clubColors,
-    venue,
+    req.body.address,
+    req.body.phone,
+    req.body.website,
+    req.body.email,
+    req.body.founded,
+    req.body.clubColors,
+    req.body.venue,
     lastUpdated
   );
 
-  teamList.push(newTeam);
-  fs.writeFileSync("../data/teams.json", JSON.stringify(teamList));
+  TeamService.addTeam(newTeam, teamList);
   res.redirect("/");
 });
 
 router.post("/form/edit/:id", upload.single("image"), (req, res) => {
   const urlParamId = req.params.id;
-
-  const {
-    country,
-    name,
-    shortName,
-    tla,
-    founded,
-    address,
-    venue,
-    clubColors,
-    website,
-    email,
-    phone,
-  } = req.body;
-
-  const area = new Area(2072, country);
+  const area = new Area(2072, req.body.country);
   const prevImage = teamList.find((team) => team.id == urlParamId).crestUrl;
   const crestUrl = req.file ? "/uploads/img/" + req.file.filename : prevImage;
   const lastUpdated = new Date().toISOString();
@@ -103,23 +73,22 @@ router.post("/form/edit/:id", upload.single("image"), (req, res) => {
   const updatedTeam = new Team(
     urlParamId,
     area,
-    name,
-    shortName,
-    tla,
+    req.body.name,
+    req.body.shortName,
+    req.body.tla,
     crestUrl,
-    address,
-    phone,
-    website,
-    email,
-    founded,
-    clubColors,
-    venue,
+    req.body.address,
+    req.body.phone,
+    req.body.website,
+    req.body.email,
+    req.body.founded,
+    req.body.clubColors,
+    req.body.venue,
     lastUpdated
   );
 
   const selectedTeamId = teamList.findIndex((team) => team.id == urlParamId);
-  teamList[selectedTeamId] = updatedTeam;
-  fs.writeFileSync("../data/teams.json", JSON.stringify(teamList));
+  TeamService.editTeam(updatedTeam, selectedTeamId, teamList);
   res.redirect("/");
 });
 
@@ -150,8 +119,7 @@ router.get("/form/delete/:id", (req, res) => {
 router.post("/form/delete/:id", (req, res) => {
   const urlParamId = req.params.id;
   const selectedTeamId = teamList.findIndex((team) => team.id == urlParamId);
-  teamList.splice(selectedTeamId, 1);
-  fs.writeFileSync("../data/teams.json", JSON.stringify(teamList));
+  TeamService.deleteTeam(selectedTeamId, teamList);
   res.redirect("/");
 });
 
