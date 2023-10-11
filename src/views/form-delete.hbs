@@ -1,0 +1,20 @@
+<div class="wrapper">
+  <h1>Delete Team</h1>
+
+  <p>{{data.selectedTeam.name}}</p>
+  <img
+    class="team-shield-img"
+    src="{{data.selectedTeam.crestUrl}}"
+    alt="{{data.selectedTeam.name}}"
+  />
+  
+  <p>Are you sure to delete this team?</p>
+
+  <div class="btn-container">
+    <form action="/form/delete/{{data.selectedTeam.id}}" method="post" class="form-delete">
+      <button type="submit">Confirm</button>
+    </form>
+
+    <a href="/">Cancel</a>
+  </div>
+</div>

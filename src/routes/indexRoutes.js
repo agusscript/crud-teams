@@ -135,4 +135,24 @@ router.get("/form/edit/:id", (req, res) => {
   });
 });
 
+router.get("/form/delete/:id", (req, res) => {
+  const urlParamId = req.params.id;
+  const selectedTeam = teamList.find((team) => team.id == urlParamId);
+
+  res.render("form-delete", {
+    layout: "main",
+    data: {
+      selectedTeam,
+    },
+  });
+});
+
+router.post("/form/delete/:id", (req, res) => {
+  const urlParamId = req.params.id;
+  const selectedTeamId = teamList.findIndex((team) => team.id == urlParamId);
+  teamList.splice(selectedTeamId, 1);
+  fs.writeFileSync("../data/teams.json", JSON.stringify(teamList));
+  res.redirect("/");
+});
+
 module.exports = router;
